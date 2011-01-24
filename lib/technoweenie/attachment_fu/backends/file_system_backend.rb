@@ -85,6 +85,7 @@ module Technoweenie # :nodoc:
         protected
           # Destroys the file.  Called in the after_destroy callback
           def destroy_file
+            return if filename.blank?
             FileUtils.rm full_filename
             # remove directory also if it is now empty
             Dir.rmdir(File.dirname(full_filename)) if (Dir.entries(File.dirname(full_filename))-['.','..']).empty?
